@@ -1,0 +1,14 @@
+按如下行号切割：
+
+文件名   起始行号         
+mxClient 1
+Util     76
+Shape    4281
+Layout   7028
+Model    9699
+View     10839
+Handler  17887
+Editor   20515
+Io       21938
+
+

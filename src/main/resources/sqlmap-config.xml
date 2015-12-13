@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" enhancementEnabled="true" lazyLoadingEnabled="false"
+		errorTracingEnabled="true" maxRequests="32" maxSessions="10" maxTransactions="5"
+		useStatementNamespaces="true" />
+		
+		<typeHandler jdbcType="CLOB" javaType="java.lang.String" callback="org.springframework.orm.ibatis.support.ClobStringTypeHandler" />
+		
+
+	<sqlMap resource="com/chengyb/framework/dao/ibatis2/ibatis.xml"/>
+	<!--
+		<typeAlias alias="osicache" type="com.chengyb.framework.dao.ibatis2.cache.OSICacheController" />
+		<sqlMap resource="class:com.chengyb.core.user.valueobject.UserInfo" />
+		<sqlMap resource="com/chengyb/core/user/user.mysql.xml"/>
+	-->
+</sqlMapConfig>

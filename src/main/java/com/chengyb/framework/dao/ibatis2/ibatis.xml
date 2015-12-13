@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="base">
+	<statement id="sql" remapResults="true">$sql$</statement>
+	<select id="query" parameterClass="java.util.Map" resultClass="java.util.HashMap" remapResults="true">$sql$</select>
+
+	<select id="queryseq" resultClass="java.util.HashMap">select * from BASE_SEQ where SNAM =#value#</select>
+	<update id="updateseq" >update BASE_SEQ set sval=sval+1 where SNAM =#value#</update>
+	
+</sqlMap>

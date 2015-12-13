@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- ========================= BEAN DEFINITIONS ========================= -->
+
+	<bean id="menuService" class="com.chengyb.mdm.menu.service.MenuServiceImpl"
+		parent="baseDao" />
+	<bean id="roleService" class="com.chengyb.mdm.role.service.RoleServiceImpl"
+		parent="baseDao" />
+	<bean id="userService" class="com.chengyb.mdm.user.service.UserServiceImpl"
+		parent="baseDao" />
+
+
+
+
+
+</beans>

@@ -1,0 +1,89 @@
+﻿<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+	<TITLE>JavaScript/HTML格式化</TITLE>
+	<META http-equiv=Content-Type content="text/html; charset=utf-8">
+</HEAD>
+
+<BODY>
+
+<SCRIPT src="JavaScript.files/base.js" type=text/javascript></SCRIPT>
+<SCRIPT src="JavaScript.files/jsformat.js" type=text/javascript></SCRIPT>
+<SCRIPT src="JavaScript.files/jsformat2.js" type=text/javascript></SCRIPT>
+<SCRIPT src="JavaScript.files/htmlformat.js" type=text/javascript></SCRIPT>
+<SCRIPT type=text/javascript>
+	//格式化代码
+	function do_js_beautify() {
+		document.getElementById('beautify').disabled = true;
+		var js_source = document.getElementById('content').value.replace(/^\s+/, '');
+		var tabsize = document.getElementById('tabsize').value;
+		var tabchar = ' ';
+		if (tabsize == 1) {
+			tabchar = '\t';
+		}
+		if (js_source && js_source.charAt(0) === '<') {
+			document.getElementById('content').value = style_html(js_source, tabsize, tabchar, 80);
+		} else {
+			document.getElementById('content').value = js_beautify(js_source, tabsize, tabchar);
+		}
+		document.getElementById('beautify').disabled = false;
+		return false;
+	}
+	//压缩代码
+	function pack_js(base64) {
+		var input = document.getElementById('content').value;
+		var packer = new Packer;
+		if (base64) {
+			var output = packer.pack(input, 1, 0);
+		} else {
+			var output = packer.pack(input, 0, 0);
+		}
+		document.getElementById('content').value = output;
+	}
+	//清空工作区
+	function Empty() {
+		document.getElementById('content').value = '';
+		document.getElementById('content').select();
+	}
+	//焦点
+	function GetFocus() {
+		document.getElementById('content').focus();
+	}
+	//去除unicode编码
+	function deCodeUnicode(){
+		var input = document.getElementById('raw').value;
+		//alert(input);
+		var evalString = "('"+input+"')";
+		//alert(evalString);
+		var a = eval(evalString);
+		//alert(a);
+		document.getElementById('content').value = a;
+	}
+</SCRIPT>
+
+<H1><DIV class=titleft>JavaScript/HTML格式化工具</DIV></H1>
+
+<DIV>
+	<input id="raw" type="input" style="width:100%;">
+	<input onclick="deCodeUnicode()" type="button" value="Unidoce解析"><br/>
+</DIV>
+<DIV style="PADDING-TOP: 10px" align=center>
+	<TEXTAREA id=content style="OVERFLOW:scroll; WIDTH: 100%; HEIGHT: 300px" name=content rows=20></TEXTAREA>
+	<SCRIPT type="text/javascript">setTimeout("GetFocus();",10)</SCRIPT>
+</DIV>
+<DIV>
+	<SELECT id=tabsize name=tabsize>
+		<OPTION value=1 selected>制表符缩进</OPTION>
+		<OPTION value=2>2个空格缩进</OPTION>
+		<OPTION value=4>4个空格缩进</OPTION>
+		<OPTION value=8>8个空格缩进</OPTION>
+	</SELECT>
+	<INPUT id=beautify onclick="return do_js_beautify()" type=button value="格式化"> 
+	<INPUT onclick="pack_js(0)" type=button value="普通压缩">
+	<INPUT onclick="pack_js(1)" type=button value="加密压缩">
+	<INPUT onclick="Empty();"   type=button value="清空结果">
+</DIV>
+
+
+
+</BODY>
+</HTML>

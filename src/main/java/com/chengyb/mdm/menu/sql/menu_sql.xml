@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.chengyb.mdm.menu.sql">
+  <typeAlias alias="menuInfo" type="com.chengyb.mdm.menu.valueobject.MenuInfo"/>
+  
+  <select id="select_" parameterClass="java.util.Map" resultClass="menuInfo">
+   <![CDATA[  
+    select * from SYS_MENU where 1 = 1 
+   ]]>
+  	<dynamic prepend="">		    
+			<isNotEmpty prepend=" and " property="dbid_">DBID_ like '%'||#dbid_#||'%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="parent_id_">PARENT_ID_ like '%'||#parent_id_#||'%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="name_">NAME_ like '%'||#name_#||'%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="url_">URL_ like '%'||#url_#||'%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="order_">ORDER_ like '%'||#order_#||'%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="description_">DESCRIPTION_ like '%'||#description_#||'%'</isNotEmpty>
+			<isNotEmpty prepend=" and " property="name_en_">NAME_EN_ like '%'||#name_en_#||'%'</isNotEmpty>
+	</dynamic>
+  </select>
+  
+  <insert id="insert_oracle" parameterClass="menuInfo">
+	
+	<selectKey resultClass="Long" keyProperty="dbid_">
+              SELECT SEQ_MDMPROP.NEXTVAL AS ID FROM DUAL
+     </selectKey>
+	
+	<![CDATA[  
+    	insert into SYS_MENU (DBID_
+   	]]>
+		<dynamic prepend="">
+			<isNotNull prepend="," property="parent_id_">PARENT_ID_</isNotNull>
+			<isNotNull prepend="," property="name_">NAME_</isNotNull>
+			<isNotNull prepend="," property="url_">URL_</isNotNull>
+			<isNotNull prepend="," property="order_">ORDER_</isNotNull>
+			<isNotNull prepend="," property="description_">DESCRIPTION_</isNotNull>
+			<isNotNull prepend="," property="name_en_">NAME_EN_</isNotNull>
+		</dynamic>
+	<![CDATA[
+	) values (#dbid_#
+	]]>
+		<dynamic prepend="">
+			<isNotNull prepend="," property="parent_id_">#parent_id_#</isNotNull>
+			<isNotNull prepend="," property="name_">#name_#</isNotNull>
+			<isNotNull prepend="," property="url_">#url_#</isNotNull>
+			<isNotNull prepend="," property="order_">#order_#</isNotNull>
+			<isNotNull prepend="," property="description_">#description_#</isNotNull>
+			<isNotNull prepend="," property="name_en_">#name_en_#</isNotNull>
+		</dynamic>
+	<![CDATA[
+	 )
+	 ]]>
+	</insert>
+ 
+  
+  <update id="update_" parameterClass="menuInfo">
+	<![CDATA[  
+    	update SYS_MENU
+   	]]>
+		<dynamic prepend="set">
+			<isNotNull prepend="," property="parent_id_">PARENT_ID_ = #parent_id_#</isNotNull>
+			<isNotNull prepend="," property="name_">NAME_ = #name_#</isNotNull>
+			<isNotNull prepend="," property="url_">URL_ = #url_#</isNotNull>
+			<isNotNull prepend="," property="order_">ORDER_ = #order_#</isNotNull>
+			<isNotNull prepend="," property="description_">DESCRIPTION_ = #description_#</isNotNull>
+			<isNotNull prepend="," property="name_en_">NAME_EN_ = #name_en_#</isNotNull>
+		</dynamic>
+	<![CDATA[
+	  where DBID_ = #dbid_#
+	 ]]>
+	</update>
+  
+  <delete id="delete_">
+   <![CDATA[  
+    delete SYS_MENU where DBID_ = #dbid_#
+   ]]>
+  </delete>
+</sqlMap>
